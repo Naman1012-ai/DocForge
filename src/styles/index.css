@@ -1,0 +1,3242 @@
+/* ==========================================================================
+   DocForge — Core Application Design Tokens & Global Styles
+   ========================================================================== */
+
+:root {
+  /* Surface & Background */
+  --bg-app: #0d1117;
+  --bg-panel: #161b22;
+  --bg-surface: #161b22;
+  --bg-surface-elevated: #21262d;
+  --bg-subtle: #21262d;
+  --bg-input: #0d1117;
+  --bg-hover: #30363d;
+  --border-color: #30363d;
+  --border-subtle: #21262d;
+  --border-focus: #58a6ff;
+
+  /* Typography */
+  --text-primary: #f0f6fc;
+  --text-secondary: #8b949e;
+  --text-muted: #6e7681;
+  --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  --font-mono: "Cascadia Code", "Fira Code", Menlo, Consolas, "Source Code Pro", monospace;
+
+  /* Accent & Action */
+  --accent-primary: #1f6feb;
+  --accent-primary-hover: #388bfd;
+  --accent-success: #238636;
+  --accent-warning: #d29922;
+  --accent-danger: #f85149;
+
+  /* Geometry & Elevation */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --header-height: 52px;
+  --statusbar-height: 30px;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-sheet: 0 12px 32px rgba(0, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.2);
+
+  /* Page Sheet Defaults (A4) */
+  --page-width: 210mm;
+  --page-height: 297mm;
+  --page-margin-top: 25mm;
+  --page-margin-right: 25mm;
+  --page-margin-bottom: 25mm;
+  --page-margin-left: 25mm;
+
+  /* Document Theme Defaults */
+  --doc-primary: #2563eb;
+  --doc-accent: #3b82f6;
+  --doc-text: #1e293b;
+  --doc-heading: #0f172a;
+  --doc-border: #e2e8f0;
+  --doc-code-bg: #f1f5f9;
+  --doc-code-text: #0f172a;
+  --doc-code-border: #e2e8f0;
+  --doc-accent-bar: #2563eb;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: var(--font-ui);
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   App Shell Layout
+   ========================================================================== */
+
+.docforge-app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* Header */
+.docforge-header {
+  height: var(--header-height);
+  background-color: var(--bg-panel);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  z-index: 20;
+  position: relative;
+}
+
+.docforge-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.docforge-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+  user-select: none;
+}
+
+.docforge-brand-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, var(--accent-primary), #388bfd);
+  color: #ffffff;
+  border-radius: var(--radius-sm);
+}
+
+.docforge-header-divider {
+  width: 1px;
+  height: 18px;
+  background-color: var(--border-color);
+}
+
+.docforge-title-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.docforge-title-button {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  max-width: 260px;
+  transition: all 0.15s ease;
+}
+
+.docforge-title-button:hover {
+  background-color: var(--bg-subtle);
+  border-color: var(--border-color);
+}
+
+.docforge-title-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.docforge-title-edit-icon {
+  color: var(--text-muted);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.docforge-title-button:hover .docforge-title-edit-icon {
+  opacity: 1;
+}
+
+.docforge-title-input {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-focus);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  outline: none;
+  width: 240px;
+}
+
+/* Save Status Indicator */
+.docforge-save-status {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: var(--radius-sm);
+  user-select: none;
+}
+
+.docforge-status-icon.success {
+  color: var(--accent-success);
+}
+
+.docforge-status-icon.saving {
+  color: var(--border-focus);
+}
+
+.docforge-status-icon.warning {
+  color: var(--accent-warning);
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Header Center: Segmented View Control */
+.docforge-header-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.docforge-segmented-control {
+  display: flex;
+  background-color: var(--bg-subtle);
+  padding: 2px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+
+.docforge-segment-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.docforge-segment-btn:hover {
+  color: var(--text-primary);
+}
+
+.docforge-segment-btn.active {
+  background-color: var(--bg-panel);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Header Right: Actions */
+.docforge-header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.docforge-header-desktop-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.docforge-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.docforge-btn-ghost {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border-color: var(--border-color);
+}
+
+.docforge-btn-ghost:hover,
+.docforge-btn-ghost.active {
+  background-color: var(--bg-subtle);
+  color: var(--text-primary);
+  border-color: var(--text-muted);
+}
+
+.docforge-btn-primary {
+  background-color: var(--accent-primary);
+  color: #ffffff;
+}
+
+.docforge-btn-primary:hover {
+  background-color: var(--accent-primary-hover);
+}
+
+.docforge-btn-primary.disabled,
+.docforge-btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Export Split Button */
+.docforge-export-split-btn {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.docforge-export-split-btn .docforge-btn-primary {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.docforge-export-menu-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--accent-primary);
+  color: #ffffff;
+  border: none;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  border-top-right-radius: var(--radius-md);
+  border-bottom-right-radius: var(--radius-md);
+  padding: 0 0.4rem;
+  height: 29px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.docforge-export-menu-arrow:hover {
+  background-color: var(--accent-primary-hover);
+}
+
+.docforge-export-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 4px;
+  width: 250px;
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  z-index: 60;
+}
+
+.docforge-export-dropdown-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.5rem 0.65rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.docforge-export-dropdown-item:hover {
+  background-color: var(--bg-subtle);
+}
+
+.docforge-export-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.docforge-export-sub {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 0.1rem;
+}
+
+/* Toast Alert */
+.docforge-toast-error {
+  position: fixed;
+  bottom: 40px;
+  right: 20px;
+  background-color: #7f1d1d;
+  color: #fef2f2;
+  border: 1px solid #b91c1c;
+  border-radius: var(--radius-md);
+  padding: 0.65rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  box-shadow: var(--shadow-md);
+  z-index: 100;
+  font-size: 0.85rem;
+  animation: slideInUp 0.2s ease-out;
+}
+
+.docforge-toast-close {
+  background: transparent;
+  border: none;
+  color: #fef2f2;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.docforge-mobile-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  padding: 0.4rem;
+  cursor: pointer;
+}
+
+.docforge-mobile-menu {
+  position: absolute;
+  top: var(--header-height);
+  right: 0.75rem;
+  width: 220px;
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  z-index: 100;
+}
+
+.docforge-mobile-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.docforge-mobile-menu-item:hover {
+  background-color: var(--bg-subtle);
+}
+
+.docforge-mobile-menu-item.primary {
+  color: var(--accent-primary-hover);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Workspace Layout
+   ========================================================================== */
+
+.docforge-workspace {
+  flex: 1;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  height: calc(100vh - var(--header-height) - var(--statusbar-height));
+}
+
+.docforge-workspace-panes {
+  flex: 1;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.docforge-workspace-panes.view-split .docforge-pane {
+  flex: 1;
+  width: 50%;
+}
+
+.docforge-workspace-panes.view-editor .docforge-pane-editor {
+  flex: 1;
+  width: 100%;
+}
+
+.docforge-workspace-panes.view-preview .docforge-pane-preview {
+  flex: 1;
+  width: 100%;
+}
+
+.docforge-pane {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.docforge-pane-editor {
+  border-right: 1px solid var(--border-color);
+  background-color: var(--bg-app);
+  position: relative;
+}
+
+.docforge-pane-preview {
+  background-color: #0b0e14;
+}
+
+/* ==========================================================================
+   Editor Panel
+   ========================================================================== */
+
+.docforge-editor-pane {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.docforge-editor-pane.drag-over {
+  outline: 2px dashed var(--accent-primary);
+  outline-offset: -4px;
+}
+
+.docforge-editor-toolbar {
+  height: 38px;
+  background-color: var(--bg-panel);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.75rem;
+  overflow-x: auto;
+}
+
+.docforge-editor-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.docforge-editor-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.docforge-toolbar-divider {
+  width: 1px;
+  height: 14px;
+  background-color: var(--border-color);
+  margin: 0 2px;
+}
+
+.docforge-editor-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.docforge-tool-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.docforge-tool-btn:hover {
+  background-color: var(--bg-subtle);
+  color: var(--text-primary);
+}
+
+.docforge-tool-btn.with-label {
+  width: auto;
+  gap: 0.35rem;
+  padding: 0 0.5rem;
+  font-size: 0.75rem;
+}
+
+/* Editor Alert */
+.docforge-editor-alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0.75rem;
+  background-color: rgba(239, 68, 68, 0.12);
+  border-bottom: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+  font-size: 0.8rem;
+  gap: 0.5rem;
+}
+
+.docforge-alert-close {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0 0.25rem;
+  opacity: 0.8;
+}
+
+.docforge-alert-close:hover {
+  opacity: 1;
+}
+
+.docforge-editor-loading-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.75rem;
+  background-color: rgba(37, 99, 235, 0.12);
+  border-bottom: 1px solid rgba(37, 99, 235, 0.25);
+  color: #93c5fd;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.docforge-editor-warning-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.45rem 0.75rem;
+  background-color: rgba(217, 119, 6, 0.12);
+  border-bottom: 1px solid rgba(217, 119, 6, 0.25);
+  color: #fcd34d;
+  font-size: 0.8rem;
+  gap: 0.5rem;
+}
+
+.docforge-warning-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+}
+
+.docforge-editor-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+}
+
+.docforge-textarea {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  padding: 1.25rem 1.5rem;
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  line-height: 1.65;
+  border: none;
+  outline: none;
+  resize: none;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  tab-size: 2;
+}
+
+.docforge-editor-empty-overlay {
+  position: absolute;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 440px;
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 5;
+  box-shadow: var(--shadow-md);
+  pointer-events: auto;
+}
+
+.docforge-editor-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.docforge-empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: var(--bg-subtle);
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.docforge-empty-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.docforge-empty-desc {
+  font-size: 0.875rem;
+  max-width: 380px;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.docforge-empty-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Drag and drop overlay */
+.docforge-drop-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(13, 17, 23, 0.92);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  z-index: 15;
+  border: 2px dashed var(--accent-primary);
+  pointer-events: none;
+}
+
+.docforge-drop-icon {
+  color: var(--accent-primary);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   Preview Panel
+   ========================================================================== */
+
+.docforge-preview-pane {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.docforge-preview-toolbar {
+  height: 38px;
+  background-color: var(--bg-panel);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.75rem;
+  z-index: 5;
+}
+
+.docforge-preview-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.docforge-preview-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.docforge-page-metrics {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.docforge-preview-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Template Dropdown Menu */
+.docforge-template-dropdown-container {
+  position: relative;
+}
+
+.docforge-template-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background-color: var(--bg-subtle);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.docforge-template-btn:hover {
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.docforge-template-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 4px;
+  width: 280px;
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  z-index: 50;
+}
+
+.docforge-template-menu-header {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  padding: 0.25rem 0.5rem;
+}
+
+.docforge-template-menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 0.45rem 0.6rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.docforge-template-menu-item:hover {
+  background-color: var(--bg-subtle);
+}
+
+.docforge-tpl-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.docforge-tpl-desc {
+  font-size: 0.725rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+  line-height: 1.35;
+}
+
+.docforge-zoom-control {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 1px;
+}
+
+.docforge-zoom-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.docforge-zoom-btn:hover:not(:disabled) {
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.docforge-zoom-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.docforge-zoom-value {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  padding: 0 0.4rem;
+  cursor: pointer;
+}
+
+.docforge-preview-viewport {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: auto;
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: radial-gradient(circle at center, #151a23 0%, #090c10 100%);
+}
+
+.docforge-preview-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4rem;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.docforge-sheet-scaler {
+  transition: transform 0.15s ease-out;
+}
+
+/* ==========================================================================
+   Settings Panel Drawer
+   ========================================================================== */
+
+.docforge-settings-drawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 320px;
+  height: 100%;
+  background-color: var(--bg-panel);
+  border-left: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  z-index: 30;
+  box-shadow: var(--shadow-md);
+  animation: slideInRight 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.docforge-settings-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.docforge-settings-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.docforge-settings-subtitle {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+.docforge-icon-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.docforge-icon-btn:hover {
+  background-color: var(--bg-subtle);
+  color: var(--text-primary);
+}
+
+.docforge-settings-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.docforge-settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.docforge-settings-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+}
+
+.docforge-button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.docforge-option-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--bg-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.docforge-option-btn:hover {
+  background-color: var(--bg-hover);
+}
+
+.docforge-option-btn.active {
+  border-color: var(--accent-primary);
+  background-color: rgba(31, 111, 235, 0.12);
+  color: var(--accent-primary-hover);
+  font-weight: 500;
+}
+
+.docforge-theme-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.docforge-theme-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0.6rem 0.75rem;
+  background-color: var(--bg-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.docforge-theme-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.docforge-theme-card.selected {
+  border-color: var(--accent-primary);
+  background-color: rgba(31, 111, 235, 0.12);
+}
+
+.docforge-theme-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin-bottom: 0.2rem;
+}
+
+.docforge-theme-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.docforge-theme-name {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.docforge-theme-check {
+  color: var(--accent-primary);
+}
+
+.docforge-theme-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.docforge-theme-preview-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.7rem;
+  color: var(--accent-primary-hover);
+  margin-top: 0.35rem;
+  font-weight: 500;
+}
+
+.docforge-section-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.docforge-btn-reset-accent {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  cursor: pointer;
+  padding: 0.15rem 0.35rem;
+  border-radius: var(--radius-sm);
+}
+
+.docforge-btn-reset-accent:hover {
+  background-color: var(--bg-subtle);
+  color: var(--text-primary);
+}
+
+.docforge-color-swatches {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.25rem;
+}
+
+.docforge-color-swatch-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.docforge-color-swatch-btn:hover {
+  transform: scale(1.15);
+}
+
+.docforge-color-swatch-btn.active {
+  border-color: #ffffff;
+  box-shadow: 0 0 0 1px var(--accent-primary);
+}
+
+.docforge-color-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+}
+
+.docforge-hex-input {
+  flex: 1;
+  background-color: var(--bg-subtle);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: var(--radius-sm);
+  outline: none;
+}
+
+.docforge-hex-input:focus {
+  border-color: var(--border-focus);
+}
+
+.docforge-color-active-swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+}
+
+.docforge-color-error {
+  font-size: 0.725rem;
+  color: var(--accent-warning);
+  margin-top: 0.25rem;
+}
+
+.docforge-segmented-button-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.3rem;
+  background-color: var(--bg-subtle);
+  padding: 2px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+
+.docforge-seg-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.25rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.docforge-seg-btn:hover {
+  color: var(--text-primary);
+}
+
+.docforge-seg-btn.active {
+  background-color: var(--bg-panel);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.docforge-button-group.three-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.35rem;
+}
+
+.docforge-button-group.three-col .docforge-option-btn,
+.docforge-button-group.four-col .docforge-option-btn {
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 0.4rem 0.3rem;
+}
+
+.docforge-button-group.four-col {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.35rem;
+}
+
+.docforge-control-subrow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 0.35rem;
+}
+
+.docforge-control-subrow.indent {
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--border-color);
+  margin-left: 0.35rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.docforge-subrow-label {
+  font-size: 0.725rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.docforge-custom-margins-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  background-color: var(--bg-subtle);
+  padding: 0.65rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+
+.docforge-margin-input-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.docforge-margin-input-box label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.docforge-margin-input-box input {
+  background-color: var(--bg-app);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: var(--radius-sm);
+  padding: 0.25rem 0.4rem;
+  font-size: 0.8rem;
+  outline: none;
+}
+
+.docforge-margin-input-box input:focus {
+  border-color: var(--border-focus);
+}
+
+.docforge-text-setting-input {
+  background-color: var(--bg-subtle);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: var(--radius-sm);
+  padding: 0.4rem 0.6rem;
+  font-size: 0.8rem;
+  outline: none;
+  width: 100%;
+}
+
+.docforge-text-setting-input:focus {
+  border-color: var(--border-focus);
+}
+
+.docforge-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 0.25rem 0;
+}
+
+.docforge-checkbox-row.sub {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.docforge-settings-section.reset-section {
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-color);
+}
+
+/* ==========================================================================
+   Status Bar
+   ========================================================================== */
+
+.docforge-statusbar {
+  height: var(--statusbar-height);
+  background-color: var(--bg-panel);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  user-select: none;
+  z-index: 10;
+}
+
+.docforge-statusbar-left,
+.docforge-statusbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.docforge-status-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.docforge-status-item.privacy {
+  color: var(--text-secondary);
+}
+
+.docforge-status-item .privacy-icon {
+  color: var(--accent-success);
+}
+
+.docforge-statusbar-separator {
+  width: 1px;
+  height: 12px;
+  background-color: var(--border-color);
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .docforge-header-center {
+    display: flex;
+  }
+
+  .docforge-header-desktop-actions {
+    display: none;
+  }
+
+  .docforge-mobile-toggle {
+    display: flex;
+  }
+
+  .docforge-workspace-panes.view-split .docforge-pane-editor,
+  .docforge-workspace-panes.view-split .docforge-pane-preview {
+    width: 50%;
+  }
+}
+
+@media (max-width: 640px) {
+  .docforge-title-button {
+    max-width: 130px;
+  }
+
+  .docforge-segment-label {
+    display: none;
+  }
+
+  .docforge-statusbar-right {
+    display: none;
+  }
+
+  .docforge-workspace-panes.view-split .docforge-pane-preview {
+    display: none;
+  }
+
+  .docforge-workspace-panes.view-split .docforge-pane-editor {
+    width: 100%;
+  }
+
+  .docforge-settings-drawer {
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   Phase 13: Template & Preset Modal System
+   ========================================================================== */
+
+.docforge-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.docforge-template-modal {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 960px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.docforge-template-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1.5rem 1.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.docforge-template-modal-header h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.docforge-template-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.docforge-modal-close {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.docforge-modal-close:hover {
+  background-color: var(--bg-panel);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.docforge-template-dirty-banner {
+  background-color: rgba(245, 158, 11, 0.12);
+  border-bottom: 1px solid rgba(245, 158, 11, 0.3);
+  color: #b45309;
+  padding: 0.75rem 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.85rem;
+}
+
+.docforge-template-dirty-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.docforge-template-dirty-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.docforge-template-categories {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-panel);
+  overflow-x: auto;
+}
+
+.docforge-category-tab {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  font-size: 0.825rem;
+  font-weight: 500;
+  padding: 0.35rem 0.85rem;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.docforge-category-tab:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-surface);
+}
+
+.docforge-category-tab.active {
+  background-color: var(--accent-primary);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.docforge-template-modal-body {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  overflow: hidden;
+  flex: 1;
+}
+
+.docforge-template-grid {
+  padding: 1.25rem 1.5rem;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  max-height: 520px;
+}
+
+.docforge-template-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.docforge-template-card:hover,
+.docforge-template-card:focus-visible {
+  border-color: var(--accent-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.docforge-template-card.selected {
+  border-color: var(--accent-primary);
+  background-color: rgba(37, 99, 235, 0.04);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+.docforge-template-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.docforge-template-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background-color: var(--bg-panel);
+  color: var(--accent-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.docforge-template-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  background-color: var(--bg-panel);
+  color: var(--text-secondary);
+}
+
+.docforge-template-card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.35rem;
+}
+
+.docforge-template-card-desc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin-bottom: 1rem;
+  flex: 1;
+}
+
+.docforge-template-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-color);
+  padding-top: 0.75rem;
+  font-size: 0.75rem;
+}
+
+.docforge-template-theme-hint {
+  color: var(--text-secondary);
+}
+
+.docforge-template-use-btn {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.docforge-template-use-btn:hover {
+  background-color: var(--accent-primary);
+  color: #ffffff;
+  border-color: var(--accent-primary);
+}
+
+.docforge-template-detail-pane {
+  background-color: var(--bg-panel);
+  border-left: 1px solid var(--border-color);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 520px;
+}
+
+.docforge-template-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.docforge-template-detail-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  background-color: var(--accent-primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.docforge-template-detail-header h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.docforge-template-detail-cat {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.docforge-template-detail-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+}
+
+.docforge-template-specs {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.docforge-spec-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.docforge-spec-row strong {
+  color: var(--text-primary);
+}
+
+.docforge-template-outline {
+  flex: 1;
+  margin-bottom: 1.25rem;
+}
+
+.docforge-template-outline h4 {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.docforge-outline-preview {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 0.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.docforge-outline-line {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.docforge-template-detail-actions .full-width {
+  width: 100%;
+  justify-content: center;
+  padding: 0.75rem;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .docforge-template-modal-body {
+    grid-template-columns: 1fr;
+  }
+  .docforge-template-detail-pane {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Phase 15: Local Document Workspace & Management System
+   ========================================================================== */
+
+.docforge-workspace-modal {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 1080px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.docforge-workspace-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1.5rem 1.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.docforge-workspace-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.docforge-workspace-title-row h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.docforge-privacy-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background-color: rgba(35, 134, 54, 0.12);
+  color: var(--accent-success);
+  border: 1px solid rgba(35, 134, 54, 0.25);
+  font-size: 0.725rem;
+  font-weight: 500;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+}
+
+.docforge-workspace-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.docforge-workspace-delete-banner {
+  background-color: rgba(239, 68, 68, 0.12);
+  border-bottom: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  padding: 0.75rem 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.85rem;
+}
+
+.docforge-delete-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.docforge-delete-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.docforge-workspace-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.75rem;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-panel);
+  gap: 1rem;
+}
+
+.docforge-workspace-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.docforge-workspace-search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 380px;
+}
+
+.docforge-search-icon {
+  position: absolute;
+  left: 0.75rem;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.docforge-workspace-search-box input {
+  width: 100%;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  padding: 0.45rem 2rem 0.45rem 2.2rem;
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.docforge-workspace-search-box input:focus {
+  border-color: var(--border-focus);
+}
+
+.docforge-search-clear {
+  position: absolute;
+  right: 0.6rem;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.docforge-workspace-sort {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.35rem 0.6rem;
+  color: var(--text-secondary);
+}
+
+.docforge-workspace-sort select {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.docforge-workspace-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.docforge-workspace-filters {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.75rem;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+  overflow-x: auto;
+}
+
+.docforge-filter-pill {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.docforge-filter-pill:hover {
+  background-color: var(--bg-panel);
+  color: var(--text-primary);
+}
+
+.docforge-filter-pill.active {
+  background-color: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.docforge-filter-count {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.docforge-workspace-body {
+  padding: 1.5rem 1.75rem;
+  overflow-y: auto;
+  max-height: 520px;
+}
+
+.docforge-workspace-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.docforge-workspace-card {
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 1.15rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.docforge-workspace-card:hover,
+.docforge-workspace-card:focus-visible {
+  border-color: var(--accent-primary);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.docforge-workspace-card.active-document {
+  border-color: var(--accent-primary);
+  background-color: rgba(37, 99, 235, 0.05);
+}
+
+.docforge-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.docforge-card-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.docforge-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+}
+
+.badge-pdf {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+}
+
+.badge-docx {
+  background-color: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+}
+
+.badge-html {
+  background-color: rgba(249, 115, 22, 0.15);
+  color: #fb923c;
+}
+
+.badge-md,
+.badge-txt {
+  background-color: rgba(100, 116, 139, 0.2);
+  color: #94a3b8;
+}
+
+.badge-template {
+  background-color: rgba(168, 85, 247, 0.15);
+  color: #c084fc;
+}
+
+.docforge-current-pill {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  background-color: rgba(35, 134, 54, 0.15);
+  color: var(--accent-success);
+  padding: 0.1rem 0.4rem;
+  border-radius: 9999px;
+}
+
+.docforge-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.docforge-card-action-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  border-radius: 4px;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.docforge-card-action-btn:hover {
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.docforge-card-action-btn.danger:hover {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.docforge-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+  line-height: 1.35;
+  word-break: break-word;
+}
+
+.docforge-inline-rename {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.4rem;
+}
+
+.docforge-inline-rename input {
+  flex: 1;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-focus);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  outline: none;
+}
+
+.docforge-card-preview-snippet {
+  font-size: 0.775rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin-bottom: 1rem;
+  height: 38px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.docforge-card-footer {
+  border-top: 1px solid var(--border-color);
+  padding-top: 0.65rem;
+  margin-top: auto;
+}
+
+.docforge-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.725rem;
+  color: var(--text-muted);
+}
+
+.docforge-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.docforge-workspace-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: var(--text-secondary);
+}
+
+.docforge-workspace-empty h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0.75rem 0 0.25rem;
+}
+
+.docforge-workspace-empty p {
+  font-size: 0.85rem;
+  max-width: 360px;
+  line-height: 1.45;
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .docforge-workspace-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .docforge-workspace-toolbar-left {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .docforge-workspace-search-box {
+    max-width: 100%;
+  }
+  .docforge-workspace-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   Phase 16: AI Document Transformation & AI-Assisted Editing
+   ========================================================================== */
+
+.docforge-btn-ai {
+  background: linear-gradient(135deg, rgba(147, 51, 234, 0.15), rgba(59, 130, 246, 0.15));
+  border: 1px solid rgba(147, 51, 234, 0.35);
+  color: #c084fc;
+  font-weight: 600;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+.docforge-btn-ai:hover {
+  background: linear-gradient(135deg, rgba(147, 51, 234, 0.25), rgba(59, 130, 246, 0.25));
+  border-color: rgba(147, 51, 234, 0.6);
+  color: #e9d5ff;
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.2);
+}
+
+.docforge-ai-tool-btn {
+  background-color: rgba(147, 51, 234, 0.1);
+  border-color: rgba(147, 51, 234, 0.25);
+  color: #c084fc;
+  font-weight: 500;
+}
+
+.docforge-ai-tool-btn:hover {
+  background-color: rgba(147, 51, 234, 0.2);
+  color: #e9d5ff;
+}
+
+/* ==========================================================================
+   Phase 16: AI Document Assistant Modal & Transformation Styling
+   ========================================================================== */
+
+.docforge-ai-modal {
+  background-color: var(--bg-panel, #161b22);
+  border: 1px solid var(--border-color, #30363d);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 960px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+  animation: fadeIn 0.2s ease-out;
+  color: var(--text-primary, #f0f6fc);
+}
+
+.docforge-ai-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.75rem;
+  border-bottom: 1px solid var(--border-color, #30363d);
+  background-color: var(--bg-panel, #161b22);
+}
+
+.docforge-ai-modal-title-box {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.docforge-ai-icon-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(147, 51, 234, 0.25) 0%, rgba(59, 130, 246, 0.25) 100%);
+  color: #c084fc;
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  flex-shrink: 0;
+}
+
+.docforge-ai-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary, #f0f6fc);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.docforge-ai-subtitle {
+  font-size: 0.825rem;
+  color: var(--text-secondary, #8b949e);
+  margin-top: 0.25rem;
+  line-height: 1.35;
+}
+
+.docforge-ai-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.docforge-ai-config-drawer {
+  background-color: var(--bg-surface-elevated, #21262d);
+  border-bottom: 1px solid var(--border-color, #30363d);
+  padding: 1.15rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  animation: fadeIn 0.15s ease-out;
+}
+
+.docforge-ai-config-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.docforge-config-title {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary, #f0f6fc);
+}
+
+.docforge-ai-config-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.docforge-config-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.docforge-config-row label {
+  font-size: 0.775rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted, #6e7681);
+}
+
+.docforge-provider-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 0.45rem;
+}
+
+.docforge-provider-preset-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  background: var(--bg-panel, #161b22);
+  border: 1px solid var(--border-color, #30363d);
+  border-radius: 6px;
+  padding: 0.45rem 0.65rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  color: inherit;
+  text-align: left;
+}
+
+.docforge-provider-preset-btn .preset-name {
+  font-size: 0.775rem;
+  font-weight: 600;
+  color: var(--text-primary, #f0f6fc);
+}
+
+.docforge-provider-preset-btn .preset-badge {
+  font-size: 0.65rem;
+  color: var(--text-muted, #6e7681);
+}
+
+.docforge-provider-preset-btn:hover {
+  border-color: #a855f7;
+  background-color: var(--bg-hover, #30363d);
+}
+
+.docforge-provider-preset-btn.active {
+  border-color: #a855f7;
+  background-color: rgba(168, 85, 247, 0.15);
+  box-shadow: 0 0 0 1px #a855f7;
+}
+
+.docforge-provider-preset-btn.active .preset-name {
+  color: #ffffff;
+}
+
+.docforge-provider-preset-btn.active .preset-badge {
+  color: #c084fc;
+  font-weight: 600;
+}
+
+.docforge-config-remote-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.75rem;
+  background-color: var(--bg-panel, #161b22);
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color, #30363d);
+}
+
+.docforge-config-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.docforge-config-field label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.725rem;
+  font-weight: 600;
+  color: var(--text-secondary, #8b949e);
+}
+
+.docforge-config-field input {
+  background-color: var(--bg-app, #0d1117);
+  border: 1px solid var(--border-color, #30363d);
+  border-radius: 6px;
+  color: var(--text-primary, #f0f6fc);
+  font-size: 0.8rem;
+  padding: 0.45rem 0.65rem;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.docforge-config-field input:focus {
+  border-color: var(--border-focus, #58a6ff);
+}
+
+.docforge-model-input-box {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.docforge-model-input-box input {
+  flex: 1;
+  min-width: 0;
+}
+
+.docforge-model-select {
+  background-color: var(--bg-app, #0d1117);
+  border: 1px solid var(--border-color, #30363d);
+  border-radius: 6px;
+  color: var(--text-secondary, #8b949e);
+  font-size: 0.75rem;
+  padding: 0.4rem 0.5rem;
+  outline: none;
+  cursor: pointer;
+  max-width: 90px;
+}
+
+/* Modal Body */
+.docforge-ai-modal-body {
+  padding: 1.5rem 1.75rem;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  background-color: var(--bg-app, #0d1117);
+}
+
+.docforge-ai-setup-view {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.docforge-section-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary, #8b949e);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.docforge-sub-label {
+  font-size: 0.725rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted, #6e7681);
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.docforge-ai-op-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.85rem;
+  width: 100%;
+}
+
+.docforge-ai-op-card {
+  background-color: var(--bg-panel, #161b22);
+  border: 1px solid var(--border-color, #30363d);
+  border-radius: 8px;
+  padding: 0.95rem 1.1rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  color: inherit;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.docforge-ai-op-card:hover {
+  border-color: #a855f7;
+  background-color: rgba(168, 85, 247, 0.06);
+  transform: translateY(-1px);
+}
+
+.docforge-ai-op-card.selected {
+  border-color: #a855f7;
+  background-color: rgba(168, 85, 247, 0.12);
+  box-shadow: 0 0 0 1px #a855f7;
+}
+
+.docforge-ai-op-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.docforge-ai-op-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary, #f0f6fc);
+}
+
+.docforge-ai-op-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background-color: rgba(168, 85, 247, 0.25);
+  color: #c084fc;
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.docforge-ai-op-desc {
+  font-size: 0.775rem;
+  color: var(--text-secondary, #8b949e);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.docforge-ai-suboptions {
+  background-color: var(--bg-panel, #161b22);
+  border: 1px solid var(--border-color, #30363d);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.docforge-tone-grid,
+.docforge-section-type-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.docforge-tone-btn,
+.docforge-section-type-btn {
+  background: var(--bg-subtle, #21262d);
+  border: 1px solid var(--border-color, #30363d);
+  color: var(--text-secondary, #8b949e);
+  font-size: 0.775rem;
+  font-weight: 500;
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.docforge-tone-btn:hover,
+.docforge-section-type-btn:hover {
+  background-color: var(--bg-hover, #30363d);
+  color: var(--text-primary, #f0f6fc);
+}
+
+.docforge-tone-btn.active,
+.docforge-section-type-btn.active {
+  background-color: #9333ea;
+  border-color: #a855f7;
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 0 0 1px #a855f7;
+}
+
+.docforge-ai-custom-prompt {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 0.25rem;
+}
+
+.docforge-input {
+  background-color: var(--bg-panel, #161b22);
+  border: 1px solid var(--border-color, #30363d);
+  color: var(--text-primary, #f0f6fc);
+  font-size: 0.85rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 6px;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.docforge-input:focus {
+  border-color: var(--border-focus, #58a6ff);
+  box-shadow: 0 0 0 1px var(--border-focus, #58a6ff);
+}
+
+.docforge-ai-error-banner {
+  background-color: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #fca5a5;
+  padding: 0.85rem 1.15rem;
+  border-radius: 8px;
+  font-size: 0.825rem;
+  line-height: 1.45;
+}
+
+.docforge-ai-error-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+.docforge-ai-error-msg {
+  word-break: break-word;
+}
+
+.docforge-ai-error-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Review View */
+.docforge-ai-review-view {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.docforge-ai-review-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.docforge-ai-review-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.docforge-ai-badge-success {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background-color: rgba(35, 134, 54, 0.15);
+  color: var(--accent-success, #238636);
+  border: 1px solid rgba(35, 134, 54, 0.3);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+}
+
+.docforge-ai-summary-text {
+  font-size: 0.825rem;
+  color: var(--text-secondary, #8b949e);
+}
+
+.docforge-ai-view-tabs {
+  display: flex;
+  background-color: var(--bg-panel, #161b22);
+  border: 1px solid var(--border-color, #30363d);
+  border-radius: 6px;
+  padding: 2px;
+}
+
+.docforge-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: var(--text-secondary, #8b949e);
+  font-size: 0.775rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.docforge-tab-btn:hover {
+  color: var(--text-primary, #f0f6fc);
+}
+
+.docforge-tab-btn.active {
+  background-color: var(--bg-hover, #30363d);
+  color: var(--text-primary, #f0f6fc);
+  font-weight: 600;
+}
+
+.docforge-preview-container {
+  background-color: var(--bg-panel, #161b22);
+  border: 1px solid var(--border-color, #30363d);
+  border-radius: 8px;
+  padding: 1.5rem;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.docforge-review-html-preview {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: #e6edf3 !important;
+}
+
+.docforge-review-html-preview h1,
+.docforge-review-html-preview h2,
+.docforge-review-html-preview h3,
+.docforge-review-html-preview h4,
+.docforge-review-html-preview h5,
+.docforge-review-html-preview h6 {
+  color: #f0f6fc !important;
+  font-weight: 700;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+  border-bottom: 1px solid var(--border-color, #30363d);
+  padding-bottom: 0.35rem;
+}
+
+.docforge-review-html-preview h1:first-child,
+.docforge-review-html-preview h2:first-child,
+.docforge-review-html-preview h3:first-child {
+  margin-top: 0;
+}
+
+.docforge-review-html-preview p {
+  color: #c9d1d9 !important;
+  margin-bottom: 0.85rem;
+  line-height: 1.6;
+}
+
+.docforge-review-html-preview strong {
+  color: #f0f6fc !important;
+  font-weight: 600;
+}
+
+.docforge-review-html-preview em {
+  color: #8b949e !important;
+  font-style: italic;
+}
+
+.docforge-review-html-preview ul,
+.docforge-review-html-preview ol {
+  color: #c9d1d9 !important;
+  padding-left: 1.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.docforge-review-html-preview li {
+  color: #c9d1d9 !important;
+  margin-bottom: 0.25rem;
+  line-height: 1.5;
+}
+
+.docforge-review-html-preview blockquote {
+  border-left: 3px solid #a855f7;
+  padding: 0.5rem 1rem;
+  margin: 0.85rem 0;
+  color: #8b949e !important;
+  background: rgba(168, 85, 247, 0.06);
+  border-radius: 0 6px 6px 0;
+}
+
+.docforge-review-html-preview blockquote p {
+  color: #8b949e !important;
+  margin-bottom: 0;
+}
+
+.docforge-review-html-preview code {
+  font-family: var(--font-mono);
+  font-size: 0.825rem;
+  background-color: #21262d;
+  color: #ff7b72;
+  padding: 0.15rem 0.35rem;
+  border-radius: 4px;
+  border: 1px solid rgba(240, 246, 252, 0.1);
+}
+
+.docforge-review-html-preview pre {
+  background-color: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 0.85rem 0;
+}
+
+.docforge-review-html-preview pre code {
+  background: transparent;
+  padding: 0;
+  border: none;
+  color: #e6edf3;
+}
+
+.docforge-review-html-preview table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.85rem;
+}
+
+.docforge-review-html-preview th {
+  background-color: #21262d;
+  color: #f0f6fc;
+  font-weight: 600;
+  text-align: left;
+  padding: 0.6rem 0.85rem;
+  border: 1px solid #30363d;
+}
+
+.docforge-review-html-preview td {
+  padding: 0.55rem 0.85rem;
+  border: 1px solid #30363d;
+  color: #c9d1d9;
+}
+
+.docforge-review-html-preview hr {
+  border: none;
+  border-top: 1px solid #30363d;
+  margin: 1.25rem 0;
+}
+
+.docforge-review-html-preview a {
+  color: #58a6ff;
+  text-decoration: none;
+}
+
+.docforge-review-html-preview a:hover {
+  text-decoration: underline;
+}
+
+.docforge-review-raw-markdown {
+  font-family: var(--font-mono);
+  font-size: 0.825rem;
+  color: #c9d1d9;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
+  line-height: 1.55;
+  background-color: #0d1117;
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid #30363d;
+}
+
+/* Modal Footer */
+.docforge-ai-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.15rem 1.75rem;
+  border-top: 1px solid var(--border-color, #30363d);
+  background-color: var(--bg-panel, #161b22);
+}
+
+.docforge-footer-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.docforge-privacy-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary, #8b949e);
+}
+
+.docforge-privacy-tag .privacy-icon {
+  color: var(--accent-success, #238636);
+}
+
+.docforge-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+@media (max-width: 768px) {
+  .docforge-ai-op-list {
+    grid-template-columns: 1fr;
+  }
+  .docforge-config-remote-fields {
+    grid-template-columns: 1fr;
+  }
+  .docforge-ai-modal-footer {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .docforge-footer-left,
+  .docforge-footer-right {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+/* ==========================================================================
+   Authoritative Document Print & PDF Isolation Stylesheet
+   ========================================================================== */
+
+/* Screen Mode: Position dedicated print root offscreen so it never interferes with UI */
+@media screen {
+  .docforge-print-root,
+  #document-print-root {
+    position: fixed !important;
+    left: -99999px !important;
+    top: 0 !important;
+    width: var(--page-width) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    z-index: -9999 !important;
+  }
+}
+
+/* Print Mode: Complete isolation of document sheets from application UI */
+@media print {
+  /* 1. Hide all Application UI, header, editor, toolbars, statusbar, sidebars, modals */
+  .docforge-app-shell,
+  .docforge-header,
+  .docforge-workspace,
+  .docforge-workspace-panes,
+  .docforge-pane,
+  .docforge-pane-editor,
+  .docforge-pane-preview,
+  .docforge-preview-toolbar,
+  .docforge-statusbar,
+  .docforge-settings-drawer,
+  .docforge-modal-backdrop,
+  .docforge-template-modal,
+  .docforge-workspace-modal,
+  .docforge-ai-modal,
+  .docforge-editor-toolbar,
+  .docforge-mobile-toggle,
+  .docforge-mobile-menu {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* 2. Reset html, body, and root to natural multi-page document flow */
+  html,
+  body,
+  #root {
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: static !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* 3. Display the dedicated document print root cleanly */
+  .docforge-print-root,
+  #document-print-root {
+    display: block !important;
+    visibility: visible !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    position: static !important;
+    background: transparent !important;
+  }
+
+  .docforge-print-root .docforge-document-renderer {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    position: static !important;
+  }
+
+  /* 4. Discrete physical sheets for print with strict page-breaks */
+  .docforge-print-root .docforge-sheet {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    width: var(--page-width) !important;
+    height: var(--page-height) !important;
+    min-height: var(--page-height) !important;
+    max-height: var(--page-height) !important;
+    margin: 0 auto !important;
+    padding: var(--page-margin-top) var(--page-margin-right) var(--page-margin-bottom) var(--page-margin-left) !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    background: var(--doc-page-bg, #ffffff) !important;
+    color: var(--doc-text, #1e293b) !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    transform: none !important; /* Zero zoom or transform matrix scaling */
+    position: relative !important;
+  }
+
+  /* Suppress trailing break after final page */
+  .docforge-print-root .docforge-sheet:last-child {
+    page-break-after: auto !important;
+    break-after: auto !important;
+  }
+
+  /* 5. Content area layout */
+  .docforge-print-root .docforge-content-area {
+    flex: 1 !important;
+    min-height: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+  }
+
+  .docforge-print-root .docforge-content {
+    word-wrap: break-word !important;
+    color: var(--doc-text, #1e293b) !important;
+  }
+
+  /* 6. Running headers & footers in print */
+  .docforge-print-root .docforge-sheet-header,
+  .docforge-print-root .docforge-sheet-footer {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* 7. Typography & Element Break Guardrails */
+  .docforge-print-root h1,
+  .docforge-print-root h2,
+  .docforge-print-root h3,
+  .docforge-print-root h4,
+  .docforge-print-root h5,
+  .docforge-print-root h6 {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  .docforge-print-root table,
+  .docforge-print-root tr,
+  .docforge-print-root blockquote,
+  .docforge-print-root pre,
+  .docforge-print-root img,
+  .docforge-print-root li {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+}
+
+
+
+

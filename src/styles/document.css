@@ -1,0 +1,393 @@
+/* ==========================================================================
+   DocForge — Document Typography, Design Tokens & Element Styling
+   ========================================================================== */
+
+.docforge-sheet {
+  background: var(--doc-page-bg, #ffffff);
+  color: var(--doc-text, #1e293b);
+  width: var(--page-width);
+  height: var(--page-height);
+  min-height: var(--page-height);
+  max-height: var(--page-height);
+  padding: var(--page-margin-top) var(--page-margin-right) var(--page-margin-bottom) var(--page-margin-left);
+  box-shadow: var(--shadow-sheet);
+  border-radius: 2px;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  margin: 0 auto 2.5rem auto;
+}
+
+.docforge-sheet:last-child {
+  margin-bottom: 1rem;
+}
+
+.docforge-content-area {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.docforge-content {
+  color: var(--doc-text, #1e293b);
+  word-wrap: break-word;
+}
+
+/* Running Header & Footer Layout */
+.docforge-sheet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 8.5pt;
+  color: var(--doc-text-secondary, #64748b);
+  border-bottom: 1px solid var(--doc-border, #e2e8f0);
+  padding-bottom: 0.35rem;
+  margin-bottom: 0.85rem;
+  user-select: none;
+}
+
+.docforge-sheet-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 8.5pt;
+  color: var(--doc-text-secondary, #64748b);
+  border-top: 1px solid var(--doc-border, #e2e8f0);
+  padding-top: 0.35rem;
+  margin-top: auto;
+  user-select: none;
+}
+
+/* Headings */
+.docforge-content h1,
+.docforge-content h2,
+.docforge-content h3,
+.docforge-content h4,
+.docforge-content h5,
+.docforge-content h6 {
+  color: var(--doc-heading, #0f172a);
+  font-family: var(--doc-heading-font, inherit);
+  font-weight: var(--doc-heading-weight, 700);
+  line-height: 1.25;
+  margin-top: var(--doc-heading-margin-top, 1.4em);
+  margin-bottom: var(--doc-heading-margin-bottom, 0.4em);
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+.docforge-content h1:first-child {
+  margin-top: 0;
+}
+
+.docforge-content h1 {
+  font-size: 1.85em;
+  text-align: var(--doc-title-align, left);
+  border-bottom: 2px solid var(--doc-primary, #2563eb);
+  padding-bottom: 0.25em;
+  letter-spacing: -0.015em;
+}
+
+.docforge-content h2 {
+  font-size: 1.35em;
+  border-bottom: 1px solid var(--doc-border, #e2e8f0);
+  padding-bottom: 0.2em;
+  letter-spacing: -0.01em;
+}
+
+.docforge-content h3 {
+  font-size: 1.15em;
+}
+
+.docforge-content h4 {
+  font-size: 1.05em;
+}
+
+.docforge-content h5,
+.docforge-content h6 {
+  font-size: 0.9em;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--doc-text-secondary, #64748b);
+}
+
+/* Paragraphs */
+.docforge-content p {
+  margin-bottom: var(--doc-paragraph-margin, 1em);
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* Inline Styles */
+.docforge-content strong {
+  font-weight: 700;
+  color: var(--doc-heading, #0f172a);
+}
+
+.docforge-content em {
+  font-style: italic;
+}
+
+.docforge-content del {
+  text-decoration: line-through;
+  opacity: 0.65;
+}
+
+.docforge-content a {
+  color: var(--doc-primary, #2563eb);
+  text-decoration: underline;
+  text-underline-offset: 2.5px;
+  word-break: break-all;
+}
+
+.docforge-content hr {
+  border: none;
+  border-top: 1px solid var(--doc-border, #e2e8f0);
+  margin: 1.5em 0;
+}
+
+/* Lists */
+.docforge-content ul,
+.docforge-content ol {
+  margin-bottom: var(--doc-paragraph-margin, 1em);
+  padding-left: 1.6em;
+}
+
+.docforge-content li {
+  margin-bottom: 0.35em;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.docforge-content li input[type="checkbox"] {
+  margin-right: 0.5em;
+  vertical-align: middle;
+  accent-color: var(--doc-primary, #2563eb);
+}
+
+/* Blockquotes */
+.docforge-content blockquote {
+  border-left: 3.5px solid var(--doc-accent-bar, #2563eb);
+  background-color: var(--doc-quote-bg, transparent);
+  color: var(--doc-quote-text, #475569);
+  padding: 0.6em 1.1em;
+  margin: 1.3em 0;
+  font-style: italic;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  border-radius: 0 4px 4px 0;
+}
+
+.docforge-content blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* Code & Preformatted Blocks */
+.docforge-content code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background-color: var(--doc-code-bg, #f1f5f9);
+  color: var(--doc-code-text, #0f172a);
+  padding: 0.15em 0.35em;
+  border-radius: 3px;
+  border: 1px solid var(--doc-code-border, #e2e8f0);
+}
+
+.docforge-content pre {
+  background-color: var(--doc-code-bg, #0f172a);
+  color: var(--doc-code-text, #f8fafc);
+  border: 1px solid var(--doc-code-border, #334155);
+  padding: 1em 1.25em;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 1.3em 0;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.docforge-content pre code {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+  border: none;
+  font-size: 0.85em;
+  line-height: 1.5;
+}
+
+/* Tables */
+.docforge-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.4em 0;
+  font-size: 9.5pt;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.docforge-content th,
+.docforge-content td {
+  border: 1px solid var(--doc-table-border, #e2e8f0);
+  padding: 0.6em 0.85em;
+  text-align: left;
+}
+
+.docforge-content th {
+  background-color: var(--doc-table-header-bg, #f8fafc);
+  font-weight: 600;
+  color: var(--doc-heading, #0f172a);
+}
+
+.docforge-content tr:nth-child(even) td {
+  background-color: rgba(0, 0, 0, 0.015);
+}
+
+/* Images */
+.docforge-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin: 1em 0;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* Parse Errors */
+.docforge-content .parse-error {
+  color: var(--accent-danger, #ef4444);
+  background-color: rgba(239, 68, 68, 0.05);
+  padding: 1em;
+  border-radius: 4px;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+/* ==========================================================================
+   Table Style Variations
+   ========================================================================== */
+
+/* 1. Minimal Table */
+.docforge-table-minimal .docforge-content th {
+  background-color: transparent;
+  border-bottom: 2px solid var(--doc-heading, #0f172a);
+}
+.docforge-table-minimal .docforge-content tr:nth-child(even) td {
+  background-color: transparent;
+}
+
+/* 2. Executive Table */
+.docforge-table-executive .docforge-content th {
+  background-color: var(--doc-table-header-bg, #f1f5f9);
+  border-bottom: 2.5px solid var(--doc-primary, #1e3a8a);
+}
+
+/* 3. Academic Table */
+.docforge-table-academic .docforge-content table {
+  border-top: 2px solid var(--doc-heading, #000000);
+  border-bottom: 2px solid var(--doc-heading, #000000);
+}
+.docforge-table-academic .docforge-content th {
+  border-bottom: 1.5px solid var(--doc-heading, #000000);
+  background-color: transparent;
+}
+
+/* 4. Technical Table */
+.docforge-table-technical .docforge-content th {
+  background-color: var(--doc-table-header-bg, #f8fafc);
+  font-family: var(--font-mono);
+  font-size: 8.5pt;
+  letter-spacing: 0.02em;
+}
+
+/* ==========================================================================
+   Quote Style Variations
+   ========================================================================== */
+
+.docforge-quote-serif-italic .docforge-content blockquote {
+  border-left: 2px solid var(--doc-heading, #0f172a);
+  background-color: transparent;
+  font-family: Georgia, serif;
+}
+
+.docforge-quote-academic-bracket .docforge-content blockquote {
+  border-left: 3px solid var(--doc-accent-bar, #78716c);
+  background-color: transparent;
+  font-family: Georgia, serif;
+  padding-left: 1.5em;
+}
+
+/* ==========================================================================
+   Phase 14: Advanced Formats, Orientation, Densities & Page Breaks
+   ========================================================================== */
+
+/* Page Formats */
+.docforge-sheet.docforge-format-a4 {
+  --page-width: 210mm;
+  --page-height: 297mm;
+}
+.docforge-sheet.docforge-format-letter {
+  --page-width: 215.9mm;
+  --page-height: 279.4mm;
+}
+.docforge-sheet.docforge-format-legal {
+  --page-width: 215.9mm;
+  --page-height: 355.6mm;
+}
+
+/* Page Orientations */
+.docforge-sheet.docforge-orientation-landscape.docforge-format-a4 {
+  --page-width: 297mm;
+  --page-height: 210mm;
+}
+.docforge-sheet.docforge-orientation-landscape.docforge-format-letter {
+  --page-width: 279.4mm;
+  --page-height: 215.9mm;
+}
+.docforge-sheet.docforge-orientation-landscape.docforge-format-legal {
+  --page-width: 355.6mm;
+  --page-height: 215.9mm;
+}
+
+/* Table Density */
+.docforge-sheet.docforge-table-density-compact .docforge-content th,
+.docforge-sheet.docforge-table-density-compact .docforge-content td {
+  padding: 0.35em 0.5em;
+  font-size: 8.5pt;
+}
+.docforge-sheet.docforge-table-density-spacious .docforge-content th,
+.docforge-sheet.docforge-table-density-spacious .docforge-content td {
+  padding: 0.85em 1.1em;
+  font-size: 10pt;
+}
+
+/* Footer Positions */
+.docforge-sheet-footer.footer-pos-left {
+  justify-content: flex-start;
+  gap: 1rem;
+}
+.docforge-sheet-footer.footer-pos-center {
+  justify-content: space-between;
+  position: relative;
+}
+.docforge-sheet-footer.footer-pos-center .footer-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.docforge-sheet-footer.footer-pos-right {
+  justify-content: space-between;
+}
+
+/* Page Break block */
+.docforge-page-break,
+hr.page-break {
+  page-break-before: always;
+  break-before: page;
+  border: none;
+  margin: 0;
+  height: 0;
+  visibility: hidden;
+}
+

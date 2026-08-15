@@ -1,0 +1,46 @@
+/* ==========================================================================
+   DocForge — Print Engine & @page Rules
+   ========================================================================== */
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  html, body, #root {
+    background: none !important;
+    color: #000000 !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Hide entire application shell / editor / toolbars during print */
+  .no-print,
+  .docforge-toolbar,
+  .docforge-editor-pane,
+  .docforge-statusbar,
+  .docforge-settings-panel {
+    display: none !important;
+  }
+
+  /* Expand preview sheet for 1:1 vector print output */
+  .docforge-preview-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: none !important;
+    overflow: visible !important;
+  }
+
+  .docforge-sheet {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+    min-height: auto !important;
+    padding: var(--page-margin-top) var(--page-margin-right) var(--page-margin-bottom) var(--page-margin-left) !important;
+  }
+}
