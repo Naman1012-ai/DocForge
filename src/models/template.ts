@@ -128,8 +128,8 @@ Start writing your document here...
       headerText: 'Engineering Project Report',
       showFooter: true,
     },
-    title: 'DocForge High-Fidelity Client-Side Document Synthesis System',
-    starterContent: `# DocForge High-Fidelity Document Synthesis System
+    title: 'DocFrame High-Fidelity Client-Side Document Synthesis System',
+    starterContent: `# DocFrame High-Fidelity Document Synthesis System
 
 **Project Lead:** [Engineer / Team Name]  
 **Status:** [Production Ready / Milestone 1.0]  
@@ -255,8 +255,8 @@ Start writing your document here...
       headerText: 'Technical Documentation',
       showFooter: true,
     },
-    title: 'DocForge Client-Side API & Integration Guide',
-    starterContent: `# DocForge Integration & Configuration Guide
+    title: 'DocFrame Client-Side API & Integration Guide',
+    starterContent: `# DocFrame Integration & Configuration Guide
 
 **Version:** 1.0.0-rc  
 **Target Platform:** Web / Desktop (Modern Chromium, Firefox, WebKit)  
@@ -264,7 +264,7 @@ Start writing your document here...
 ---
 
 ## 1. Overview
-DocForge is a high-performance, client-side document synthesis and PDF export framework. It transforms Markdown, Plain Text, PDF, DOCX, and HTML documents into publication-quality discrete-sheet PDFs.
+DocFrame is a high-performance, client-side document synthesis and PDF export framework. It transforms Markdown, Plain Text, PDF, DOCX, and HTML documents into publication-quality discrete-sheet PDFs.
 
 ## 2. Prerequisites
 - Node.js >= 18.0.0

@@ -199,7 +199,7 @@ function analyzeDocumentContent(text: string, title: string): DocumentContextAna
  */
 export class LocalAIProvider implements AIProvider {
   id = 'local';
-  name = 'DocForge Local Engine (Offline & Private)';
+  name = 'DocFrame Local Engine (Offline & Private)';
   isLocal = true;
 
   isConfigured(): boolean {
@@ -393,7 +393,7 @@ export class LocalAIProvider implements AIProvider {
       case 'recommendations':
         return `## Recommendations & Strategic Next Steps\n\nBased on the analysis of **${title}**, the following actionable initiatives are recommended:\n\n| Priority | Recommendation | Impact | Status |\n| :--- | :--- | :--- | :--- |\n| **P0** | Refine and ratify primary subject points | High Clarity | Immediate |\n| **P1** | Align document layout and visual formatting | High Presentation | In Progress |\n| **P2** | Verify final sheet pagination and export | High Reliability | Planned |`;
       case 'faq':
-        return `## Frequently Asked Questions (FAQ)\n\n#### Q: What is the main objective of ${title}?\n**A:** The primary objective is to present and clarify ${summaryPoint} with structured, professional document formatting.\n\n#### Q: How are the key topics structured?\n**A:** Topics are divided into logical sections to ensure maximum readability and clean discrete-sheet pagination.\n\n#### Q: Can this document be exported directly to PDF?\n**A:** Yes, DocForge renders high-fidelity vector PDF pages directly within your browser.`;
+        return `## Frequently Asked Questions (FAQ)\n\n#### Q: What is the main objective of ${title}?\n**A:** The primary objective is to present and clarify ${summaryPoint} with structured, professional document formatting.\n\n#### Q: How are the key topics structured?\n**A:** Topics are divided into logical sections to ensure maximum readability and clean discrete-sheet pagination.\n\n#### Q: Can this document be exported directly to PDF?\n**A:** Yes, DocFrame renders high-fidelity vector PDF pages directly within your browser.`;
       case 'executive-summary':
       default:
         return this.generateSummary(_content, analysis);
@@ -460,8 +460,8 @@ export class OpenAICompatibleProvider implements AIProvider {
 
     // OpenRouter headers
     if (this.config.type === 'openrouter' || endpoint.includes('openrouter.ai')) {
-      headers['HTTP-Referer'] = 'https://docforge.app';
-      headers['X-Title'] = 'DocForge';
+      headers['HTTP-Referer'] = 'https://docframe.app';
+      headers['X-Title'] = 'DocFrame';
     }
 
     const body = {

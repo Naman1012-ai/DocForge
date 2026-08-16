@@ -5,7 +5,7 @@
 /**
  * Sanitizes a document title into a safe, valid filesystem filename with .pdf extension
  */
-export function generatePdfFilename(title: string, defaultName: string = 'docforge-document'): string {
+export function generatePdfFilename(title: string, defaultName: string = 'docframe-document'): string {
   if (!title || typeof title !== 'string') {
     return `${defaultName}.pdf`;
   }

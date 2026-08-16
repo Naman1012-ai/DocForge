@@ -194,7 +194,7 @@ export const WorkspaceModal: React.FC = () => {
               </span>
             </div>
             <p className="docforge-workspace-subtitle">
-              Manage, reopen, duplicate, and search all your saved DocForge documents.
+              Manage, reopen, duplicate, and search all your saved DocFrame documents.
             </p>
           </div>
           <button

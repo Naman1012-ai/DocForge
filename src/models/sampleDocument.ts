@@ -2,7 +2,7 @@ export const SAMPLE_MARKDOWN_DOCUMENT = `# Quarterly Architecture & Engineering 
 
 ## 1. Executive Summary
 
-DocForge represents a major advancement in **local-first document authoring** and *vector PDF generation*. By shifting document parsing and layout calculation to modern browser engines, we provide ~~cumbersome manual formatting~~ **instant visual feedback** while guaranteeing complete data privacy.
+DocFrame represents a major advancement in **local-first document authoring** and *vector PDF generation*. By shifting document parsing and layout calculation to modern browser engines, we provide ~~cumbersome manual formatting~~ **instant visual feedback** while guaranteeing complete data privacy.
 
 ---
 
@@ -64,6 +64,6 @@ interface DocumentPipeline {
 
 ## 6. Resources & Reference Links
 
-* Explore the project architecture at [DocForge GitHub Repository](https://github.com/docforge/engine).
+* Explore the project architecture at [DocFrame GitHub Repository](https://github.com/docframe/engine).
 * For styling standards, refer to the [CommonMark Specification](https://commonmark.org).
 `;

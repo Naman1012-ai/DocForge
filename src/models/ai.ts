@@ -76,14 +76,14 @@ export interface ProviderPresetInfo {
 export const PROVIDER_PRESETS: Record<string, ProviderPresetInfo> = {
   local: {
     id: 'local',
-    name: 'DocForge Local Engine',
+    name: 'DocFrame Local Engine',
     badge: '100% Offline',
     defaultEndpoint: '',
-    defaultModel: 'docforge-local-rules-v1',
+    defaultModel: 'docframe-local-rules-v1',
     placeholderKey: 'No API Key required (100% Offline)',
     isKeyRequired: false,
     isLocal: true,
-    models: ['docforge-local-rules-v1'],
+    models: ['docframe-local-rules-v1'],
   },
   gemini: {
     id: 'gemini',
@@ -201,6 +201,6 @@ export const PROVIDER_PRESETS: Record<string, ProviderPresetInfo> = {
 
 export const DEFAULT_AI_CONFIG: AIProviderConfig = {
   type: 'local',
-  model: 'docforge-local-rules-v1',
+  model: 'docframe-local-rules-v1',
   temperature: 0.3,
 };

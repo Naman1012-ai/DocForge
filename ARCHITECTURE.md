@@ -1,8 +1,8 @@
-# DocForge — System Architecture & Technical Design
+# DocFrame — System Architecture & Technical Design
 
 ## 1. Executive Summary
 
-DocForge is an architecture-first, privacy-respecting, client-side web application for generating high-quality PDFs from structured text and multiple file formats. This document outlines the technical design, security model, discrete-sheet pagination engine, multi-provider AI architecture, data flow, rendering pipeline, PDF export engine, and test architecture.
+DocFrame is an architecture-first, privacy-respecting, client-side web application for generating high-quality PDFs from structured text and multiple file formats. This document outlines the technical design, security model, discrete-sheet pagination engine, multi-provider AI architecture, data flow, rendering pipeline, PDF export engine, and test architecture.
 
 ---
 
@@ -55,13 +55,13 @@ DocForge is an architecture-first, privacy-respecting, client-side web applicati
 
 ## 3. Universal Multi-Provider AI Architecture (Phase 16)
 
-DocForge provides a dual-mode AI transformation subsystem managed through the `AIProvider` interface:
+DocFrame provides a dual-mode AI transformation subsystem managed through the `AIProvider` interface:
 
 ```text
-                               ┌─► [DocForge Local Engine] (100% Offline, Zero Network)
+                               ┌─► [DocFrame Local Engine] (100% Offline, Zero Network)
                                ├─► [OpenAI API] (GPT-4o, GPT-4o-mini, o1-mini)
-                               ├─► [Anthropic Claude] (Claude 3.5 Sonnet, Claude 3.5 Haiku)
-[AI Transformation Request] ───┼─► [Google Gemini] (Gemini 1.5 Flash, Gemini 1.5 Pro, 2.0 Flash)
+                               ├─► [Anthropic Claude] (Claude 3.5 Sonnet, Claude 3.5 Haiku, Claude 3.7)
+[AI Transformation Request] ───┼─► [Google Gemini] (Gemini 2.0 Flash, Gemini 2.5 Flash, Gemini 1.5 Flash)
                                ├─► [Groq Cloud] (Llama 3.3 70B, Mixtral 8x7B)
                                ├─► [DeepSeek] (DeepSeek V3, DeepSeek R1)
                                ├─► [OpenRouter] (Unified access to 200+ models)
@@ -77,7 +77,7 @@ DocForge provides a dual-mode AI transformation subsystem managed through the `A
    - Built-in URL auto-healing and normalization to prevent 404 errors when base URLs are supplied.
    - Auto-fallback to local dev proxy (`/api/ollama`) to bypass browser CORS restrictions when testing local models.
 3. **Anti-Prompt Injection Guardrails (`src/lib/ai/prompts.ts`)**:
-   - Untrusted document text is enclosed inside explicit XML boundary delimiters: `<docforge_untrusted_content>`.
+   - Untrusted document text is enclosed inside explicit XML boundary delimiters: `<docframe_untrusted_content>`.
    - The remote model is instructed to treat the document strictly as passive data rather than instructions.
 4. **Volatile Key Management & Sanitization**:
    - API keys are held strictly in memory state during the active browser session; never written to `localStorage` or transmitted to third parties.
@@ -93,7 +93,7 @@ DocForge provides a dual-mode AI transformation subsystem managed through the `A
    - File uploads restricted to supported formats (`.md`, `.txt`, `.docx`, `.html`, `.pdf`) with a 25 MB max limit.
    - Path-traversal sanitization (`../../etc/passwd` ➔ `Passwd`).
 4. **Resilient Local Persistence**:
-   - IndexedDB database (`docforge_workspace`) with automatic version migration and corrupted record recovery.
+   - IndexedDB database (`DocFrameWorkspaceDB` with transparent migration from legacy `DocForgeWorkspaceDB`) with automatic version migration and corrupted record recovery.
 5. **Print Isolation**:
    - Screen UI components are isolated from the print DOM to ensure zero UI chrome leakage during printing.
 
@@ -101,7 +101,7 @@ DocForge provides a dual-mode AI transformation subsystem managed through the `A
 
 ## 5. Automated Test Strategy & Architecture
 
-DocForge maintains **106 automated tests across 20 test suites** powered by Vitest:
+DocFrame maintains **106 automated tests across 20 test suites** powered by Vitest:
 
 1. `tests/aiTransformation.test.ts`: Multi-provider instantiation, URL normalizers, anti-injection prompts, sanitization, and context-aware transformations.
 2. `tests/pagination.test.ts`: Physical page dimensions, block splitting, single-page fit, multi-page flows, heading orphan prevention, script/dialogue pagination.

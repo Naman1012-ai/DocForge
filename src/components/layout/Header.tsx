@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  FileText,
   Sliders,
   Download,
   Printer,
@@ -145,11 +144,17 @@ export const Header: React.FC = () => {
   return (
     <header className="docforge-header" role="banner">
       <div className="docforge-header-left">
-        <div className="docforge-brand" title="DocForge Document Engine">
-          <div className="docforge-brand-icon">
-            <FileText size={18} />
+        <div className="docforge-brand" title="DocFrame Workspace">
+          <div className="docforge-brand-icon" aria-hidden="true">
+            <img
+              src="/docframe-logo.png"
+              alt=""
+              className="docframe-header-logo"
+              width="28"
+              height="28"
+            />
           </div>
-          <span className="docforge-brand-name">DocForge</span>
+          <span className="docforge-brand-name">DocFrame</span>
         </div>
 
         <div className="docforge-header-divider" />

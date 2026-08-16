@@ -157,7 +157,7 @@ describe('PDF Importer & Document Reconstructor 2.0 (Phase 11 & 11.1)', () => {
 
   it('cleans up line-break hyphenation while preserving legitimate hyphens', () => {
     const pageItems: ExtractedTextItem[] = [
-      { str: 'DocForge provides high-perfor- ', x: 50, y: 700, height: 10, width: 150, fontName: 'Helvetica' },
+      { str: 'DocFrame provides high-perfor- ', x: 50, y: 700, height: 10, width: 150, fontName: 'Helvetica' },
       { str: 'mance state-of-the-art client-side document synthesis.', x: 50, y: 685, height: 10, width: 260, fontName: 'Helvetica' },
     ];
 

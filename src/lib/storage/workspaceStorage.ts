@@ -18,16 +18,52 @@ export interface WorkspaceDocumentRecord {
   pageCount?: number;
 }
 
-const DB_NAME = 'DocForgeWorkspaceDB';
+const DB_NAME = 'DocFrameWorkspaceDB';
+const LEGACY_DB_NAME = 'DocForgeWorkspaceDB';
 const STORE_NAME = 'documents';
 const DB_VERSION = 1;
-const FALLBACK_STORAGE_KEY = 'docforge_workspace_records_v1';
+const FALLBACK_STORAGE_KEY = 'docframe_workspace_records_v1';
+const LEGACY_FALLBACK_STORAGE_KEY = 'docforge_workspace_records_v1';
 
 // In-memory cache & fallback store for non-IDB environments (tests, sandboxed iframes)
 let memoryStore: Map<string, WorkspaceDocumentRecord> = new Map();
+let migrationAttempted = false;
 
 function hasIndexedDb(): boolean {
   return typeof window !== 'undefined' && typeof window.indexedDB !== 'undefined';
+}
+
+async function migrateLegacyDatabase(targetDb: IDBDatabase): Promise<void> {
+  if (migrationAttempted || !hasIndexedDb()) return;
+  migrationAttempted = true;
+
+  try {
+    const legacyReq = indexedDB.open(LEGACY_DB_NAME, 1);
+    legacyReq.onsuccess = () => {
+      const legacyDb = legacyReq.result;
+      if (!legacyDb.objectStoreNames.contains(STORE_NAME)) {
+        legacyDb.close();
+        return;
+      }
+      const readTx = legacyDb.transaction(STORE_NAME, 'readonly');
+      const store = readTx.objectStore(STORE_NAME);
+      const getAllReq = store.getAll();
+
+      getAllReq.onsuccess = () => {
+        const records = getAllReq.result || [];
+        if (records.length > 0) {
+          const writeTx = targetDb.transaction(STORE_NAME, 'readwrite');
+          const writeStore = writeTx.objectStore(STORE_NAME);
+          for (const rec of records) {
+            writeStore.put(rec);
+          }
+        }
+        legacyDb.close();
+      };
+    };
+  } catch (e) {
+    console.warn('Legacy DB migration skipped:', e);
+  }
 }
 
 function openDatabase(): Promise<IDBDatabase> {
@@ -48,7 +84,11 @@ function openDatabase(): Promise<IDBDatabase> {
       }
     };
 
-    request.onsuccess = () => resolve(request.result);
+    request.onsuccess = () => {
+      const db = request.result;
+      migrateLegacyDatabase(db).catch(() => {});
+      resolve(db);
+    };
     request.onerror = () => reject(request.error || new Error('Failed to open IndexedDB'));
   });
 }
@@ -122,7 +162,9 @@ export async function getAllDocuments(): Promise<WorkspaceDocumentRecord[]> {
   // LocalStorage / Memory Fallback
   try {
     if (typeof localStorage !== 'undefined') {
-      const serialized = localStorage.getItem(FALLBACK_STORAGE_KEY);
+      const serialized =
+        localStorage.getItem(FALLBACK_STORAGE_KEY) ||
+        localStorage.getItem(LEGACY_FALLBACK_STORAGE_KEY);
       if (serialized) {
         const parsed = JSON.parse(serialized);
         if (Array.isArray(parsed)) {

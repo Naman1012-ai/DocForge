@@ -18,9 +18,9 @@ describe('Filename Utility & Sanitization', () => {
   });
 
   it('handles empty or whitespace-only titles by falling back to default', () => {
-    expect(generatePdfFilename('')).toBe('docforge-document.pdf');
-    expect(generatePdfFilename('   ')).toBe('docforge-document.pdf');
-    expect(generatePdfFilename('...')).toBe('docforge-document.pdf');
+    expect(generatePdfFilename('')).toBe('docframe-document.pdf');
+    expect(generatePdfFilename('   ')).toBe('docframe-document.pdf');
+    expect(generatePdfFilename('...')).toBe('docframe-document.pdf');
   });
 
   it('truncates excessively long titles to 80 chars max', () => {

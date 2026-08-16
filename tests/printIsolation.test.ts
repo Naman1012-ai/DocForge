@@ -80,7 +80,7 @@ All transactions must be validated against immutable ledger constraints before c
       showFooter: true,
       showPageNumbers: true,
       headerText: 'Confidential Internal Report',
-      footerText: 'DocForge Enterprise Edition',
+      footerText: 'DocFrame Enterprise Edition',
     };
 
     const pages = paginateDocumentHtml(html, settings, resolveThemeTokens('modern', settings));

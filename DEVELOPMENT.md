@@ -1,4 +1,4 @@
-# DocForge — Development Guide & Conventions
+# DocFrame — Development Guide & Conventions
 
 ## 1. Development Principles
 
@@ -54,7 +54,7 @@ Located in [`src/models/template.ts`](file:///c:/CODING/Personal_Use_projects/Te
 
 ## 4. Test Suite Architecture
 
-DocForge maintains **106 automated tests across 20 test suites**:
+DocFrame maintains **106 automated tests across 20 test suites**:
 - `tests/aiTransformation.test.ts` — Universal AI multi-provider, prompts, and validator
 - `tests/pagination.test.ts` — Virtual discrete-sheet pagination & orphan prevention
 - `tests/templates.test.ts` — Built-in document template validation
@@ -62,7 +62,7 @@ DocForge maintains **106 automated tests across 20 test suites**:
 - `tests/pdfImporter.test.ts` — Multi-column PDF layout reconstruction
 - `tests/docxImporter.test.ts` — Word document binary extraction & error handling
 - `tests/htmlImporter.test.ts` — HTML DOM parsing and GFM Markdown normalization
-- `tests/workspace.test.ts` — IndexedDB local workspace persistence & CRUD
+- `tests/workspace.test.ts` — IndexedDB workspace persistence & CRUD
 - `tests/e2eUserJourney.test.ts` — Complete input-to-export user journeys
 - `tests/markdownParser.test.ts` — GFM AST tokenization & sanitization
 - `tests/markdownEdgeCases.test.ts` — Edge cases, malformed tables, Unicode

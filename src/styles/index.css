@@ -124,9 +124,15 @@ html, body, #root {
   justify-content: center;
   width: 28px;
   height: 28px;
-  background: linear-gradient(135deg, var(--accent-primary), #388bfd);
-  color: #ffffff;
   border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.docframe-header-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .docforge-header-divider {

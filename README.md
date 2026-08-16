@@ -1,8 +1,8 @@
-# DocForge (Text-to-PDF Engine)
+# DocFrame (Text-to-PDF Engine)
 
 > **Structured text → professionally formatted document → PDF**
 
-DocForge is a high-performance, local-first web application designed to transform structured text, Markdown, DOCX, HTML, and imported PDFs into presentation-ready, beautifully styled, downloadable vector PDF documents with client-side AI document assistance.
+DocFrame is a high-performance, local-first web application designed to transform structured text, Markdown, DOCX, HTML, and imported PDFs into presentation-ready, beautifully styled, downloadable vector PDF documents with client-side AI document assistance.
 
 ---
 
@@ -38,7 +38,7 @@ DocForge is a high-performance, local-first web application designed to transfor
 - **Universal Multi-Provider AI Assistant**:
   - **Local Engine (100% Offline & Private)**: Built-in context-aware NLP engine with zero network transmission and zero API keys.
   - **Remote Providers**: Native support for **OpenAI**, **Anthropic Claude**, **Google Gemini**, **Groq Cloud**, **DeepSeek**, **OpenRouter**, **Ollama / Local LLMs**, and custom endpoints.
-  - **Anti-Prompt Injection Defense**: Untrusted user text enclosed in strict XML boundary delimiters (`<docforge_untrusted_content>`).
+  - **Anti-Prompt Injection Defense**: Untrusted user text enclosed in strict XML boundary delimiters (`<docframe_untrusted_content>`).
   - **Volatile Session Security**: Remote API keys stored strictly in volatile session memory; never persisted to disk or cookies.
 - **Strict Multi-Layer Security Boundary**:
   - Whitelist-based sanitization schema via `unified`, `remark-gfm`, and `rehype-sanitize`.
@@ -98,3 +98,4 @@ npm run build
 - [ARCHITECTURE.md](file:///c:/CODING/Personal_Use_projects/Text_to_pdf_gpt/ARCHITECTURE.md) — Technical architecture, security design, design token schema, multi-provider AI engine, and export pipeline.
 - [PRODUCT.md](file:///c:/CODING/Personal_Use_projects/Text_to_pdf_gpt/PRODUCT.md) — Product requirements, user journeys, scope & boundaries.
 - [DEVELOPMENT.md](file:///c:/CODING/Personal_Use_projects/Text_to_pdf_gpt/DEVELOPMENT.md) — Development conventions, testing commands, and workflows.
+- [PHASE-16.md](file:///c:/CODING/Personal_Use_projects/Text_to_pdf_gpt/PHASE-16.md) — AI Document Transformation & AI-Assisted Editing specifications.

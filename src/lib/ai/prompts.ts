@@ -5,10 +5,10 @@
 
 import type { AITransformationRequest } from '../../models/ai';
 
-export const ANTI_INJECTION_DELIMITER_START = '<docforge_untrusted_content>';
-export const ANTI_INJECTION_DELIMITER_END = '</docforge_untrusted_content>';
+export const ANTI_INJECTION_DELIMITER_START = '<docframe_untrusted_content>';
+export const ANTI_INJECTION_DELIMITER_END = '</docframe_untrusted_content>';
 
-export const BASE_SYSTEM_INSTRUCTION = `You are DocForge AI, an expert document editing and transformation engine.
+export const BASE_SYSTEM_INSTRUCTION = `You are DocFrame AI, an expert document editing and transformation engine.
 Your sole responsibility is to transform or generate Markdown-formatted document content according to the requested operation.
 
 CRITICAL SECURITY & BEHAVIOR RULES:

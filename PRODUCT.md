@@ -1,10 +1,10 @@
-# DocForge — Product Definition & Scope
+# DocFrame — Product Definition & Scope
 
 ## 1. Product Vision
 
 > **A document generation tool that turns structured content into presentation-ready documents.**
 
-DocForge eliminates the frustration of formatting documents. Rather than forcing users to manually fight with margins in traditional word processors or write complex LaTeX/CSS markup, DocForge accepts structured text (Markdown, DOCX, HTML, imported PDFs), automatically applies professional document styling, renders an accurate paginated preview, offers client-side AI editing assistance, and produces a publication-quality vector PDF.
+DocFrame eliminates the frustration of formatting documents. Rather than forcing users to manually fight with margins in traditional word processors or write complex LaTeX/CSS markup, DocFrame accepts structured text (Markdown, DOCX, HTML, imported PDFs), automatically applies professional document styling, renders an accurate paginated preview, offers client-side AI editing assistance, and produces a publication-quality vector PDF.
 
 ---
 
@@ -16,7 +16,7 @@ DocForge eliminates the frustration of formatting documents. Rather than forcing
 - **Generic Markdown Converters**: Output raw, unstyled HTML dumped into a PDF with broken page cuts, missing page numbers, ugly code blocks, and zero visual pacing.
 - **Cloud Document Services**: Compromise user privacy by uploading sensitive corporate documents and source code to remote servers.
 
-### The DocForge Solution
+### The DocFrame Solution
 - Instant conversion from raw Markdown, DOCX, HTML, or imported PDFs to a beautifully paced, paginated document.
 - Universal AI Document Assistant with 100% offline local rules as well as multi-provider LLM support.
 - Local document workspace for persistent client-side document management without database dependencies.
@@ -72,7 +72,7 @@ DocForge eliminates the frustration of formatting documents. Rather than forcing
   8. *Blank Document* (Clean slate with standard geometry)
 
 ### 4.4 Local Document Workspace (Phase 15)
-- IndexedDB-backed local storage (`docforge_workspace`).
+- IndexedDB-backed local storage (`DocFrameWorkspaceDB` with legacy compatibility).
 - Document grid with live search, theme badges, word count, and last saved timestamps.
 - Sorting by Last Updated, Title, or Word Count.
 - Document management: Create New, Duplicate, Rename Title, Delete.
@@ -101,6 +101,6 @@ DocForge eliminates the frustration of formatting documents. Rather than forcing
 
 ### Journey B: Document Conversion (DOCX / HTML / PDF)
 1. **Upload**: User drops a Word `.docx` or `.pdf` file into the editor.
-2. **Reconstruction**: DocForge extracts the structure, tables, and headings into clean, editable Markdown.
+2. **Reconstruction**: DocFrame extracts the structure, tables, and headings into clean, editable Markdown.
 3. **Restyling**: User switches the theme to *Executive* and sets margins to *Standard*.
 4. **Export**: User downloads the formatted PDF.

@@ -120,7 +120,7 @@ export async function extractPdfContent(
         pageCount,
         wordCount: 0,
         warnings: ['This PDF appears to be scanned or image-based. OCR is not currently supported in V1.'],
-        error: 'This PDF appears to be scanned or image-based. DocForge could not extract selectable text.',
+        error: 'This PDF appears to be scanned or image-based. DocFrame could not extract selectable text.',
       };
     }
 
@@ -182,7 +182,7 @@ export async function extractPdfContent(
       pageCount: 0,
       wordCount: 0,
       warnings: [],
-      error: errorObj?.message || "DocForge couldn't extract readable text from this PDF.",
+      error: errorObj?.message || "DocFrame couldn't extract readable text from this PDF.",
     };
   }
 }

@@ -4,7 +4,7 @@ import { THEME_PRESETS, type ThemeId } from '../src/models/theme';
 
 describe('Document Model & Metadata', () => {
   it('calculates word, line, and char counts accurately', () => {
-    const content = 'Hello world from DocForge.\nSecond line with five words.';
+    const content = 'Hello world from DocFrame.\nSecond line with five words.';
     const meta = calculateMetadata(content);
     expect(meta.wordCount).toBe(9);
     expect(meta.lineCount).toBe(2);
