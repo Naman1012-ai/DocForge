@@ -106,7 +106,9 @@ export function normalizeGeminiEndpoint(
 function formatFetchError(err: unknown, providerName: string, endpoint: string): Error {
   if (err instanceof Error) {
     if (err.name === 'AbortError') {
-      return new Error(`${providerName} request timed out after 35 seconds.`);
+      return new Error(
+        `${providerName} request timed out after 60 seconds. The server took too long to respond. You can try again or switch to the 100% Offline Local Engine.`
+      );
     }
     if (
       err.message.includes('Failed to fetch') ||
@@ -476,7 +478,7 @@ export class OpenAICompatibleProvider implements AIProvider {
     const isLocalhostOllama = endpoint.includes('localhost:11434') || endpoint.includes('127.0.0.1:11434');
 
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 35000); // 35s timeout
+    const timeoutId = setTimeout(() => controller.abort(), 60000); // 60s timeout
 
     try {
       let res: Response;
@@ -591,7 +593,7 @@ export class AnthropicProvider implements AIProvider {
     };
 
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 35000);
+    const timeoutId = setTimeout(() => controller.abort(), 60000); // 60s timeout
 
     try {
       const res = await fetch(endpoint, {
@@ -655,7 +657,8 @@ export class GeminiProvider implements AIProvider {
 
     const { systemPrompt, userPrompt } = buildAIPrompt(request);
     const model = this.config.model || 'gemini-1.5-flash';
-    const url = normalizeGeminiEndpoint(this.config.endpoint, model, this.config.apiKey || '');
+    const apiKey = (this.config.apiKey || '').trim();
+    const url = normalizeGeminiEndpoint(this.config.endpoint, model, apiKey);
 
     const body = {
       contents: [
@@ -673,13 +676,18 @@ export class GeminiProvider implements AIProvider {
       },
     };
 
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+      'x-goog-api-key': apiKey,
+    };
+
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 35000);
+    const timeoutId = setTimeout(() => controller.abort(), 60000); // 60s timeout
 
     try {
       const res = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify(body),
         signal: controller.signal,
       });
@@ -688,11 +696,22 @@ export class GeminiProvider implements AIProvider {
 
       if (!res.ok) {
         const errorText = await res.text().catch(() => '');
-        let detailedMsg = `Gemini API request failed with status ${res.status}: ${errorText || res.statusText}`;
+        let parsedErrorMsg = '';
+        if (errorText) {
+          try {
+            const errJson = JSON.parse(errorText);
+            parsedErrorMsg = errJson.error?.message || errJson.error || errJson.message || '';
+          } catch {
+            parsedErrorMsg = errorText;
+          }
+        }
+        let detailedMsg = `Gemini API request failed (${res.status}): ${parsedErrorMsg || res.statusText}`;
         if (res.status === 404) {
-          detailedMsg = `Gemini model "${model}" or endpoint not found (HTTP 404). Verify model name or API URL.`;
+          detailedMsg = `Gemini model "${model}" or endpoint not found (HTTP 404). Verify model name or API URL in AI Settings.`;
         } else if (res.status === 400 || res.status === 403) {
-          detailedMsg = `Gemini API request rejected (HTTP ${res.status}): ${errorText || 'Check API key permissions.'}`;
+          detailedMsg = `Gemini API rejected request (${res.status}): ${parsedErrorMsg || 'Check API key and permissions.'}`;
+        } else if (res.status === 429) {
+          detailedMsg = `Gemini API rate limit or quota exceeded (HTTP 429). Please wait a moment before trying again.`;
         }
         throw new Error(detailedMsg);
       }
