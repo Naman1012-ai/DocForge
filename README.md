@@ -26,14 +26,13 @@ DocFrame is a high-performance, local-first web application designed to transfor
 - **Phase 14 — Advanced Document Controls & Layout Configuration**: ✅ Completed (Legal Format, Orientation, Spacing & Geometry)
 - **Phase 15 — Local Document Workspace & Persistent Document Management**: ✅ Completed (IndexedDB Local Workspace, Search, Sort & CRUD)
 - **Phase 16 — AI Document Transformation & AI-Assisted Editing**: ✅ Completed (Universal Multi-Provider Engine: Offline Local, OpenAI, Claude, Gemini, Groq, DeepSeek, OpenRouter, Ollama)
-- **Phase 17 — PWA Installability & Production Hardening**: ✅ Completed (Web App Manifest, Standalone PWA, Safe Service Worker, Offline Shell, Multi-Size Icons)
 
 ---
 
 ## 🎯 Production Quality & Security Guarantees
 
-- **100% Client-Side Privacy & PWA Offline Capability**:
-  - Zero required document uploads, zero telemetry tracking, and zero mandatory cloud storage dependencies. Operates entirely offline inside the browser sandbox with PWA standalone installability.
+- **100% Client-Side Privacy**:
+  - Zero required document uploads, zero telemetry tracking, and zero mandatory cloud storage dependencies. Operates entirely offline inside the browser sandbox.
 - **Universal Multi-Format Ingestion**:
   - Direct import for Markdown (`.md`), Plain Text (`.txt`), Word Documents (`.docx`), Web Pages (`.html`), and vector/text PDFs (`.pdf`) with structural reconstruction into the unified `DocumentModel`.
 - **Universal Multi-Provider AI Assistant**:
@@ -57,7 +56,7 @@ DocFrame is a high-performance, local-first web application designed to transfor
   - Isolated `@media print` CSS root to guarantee clean browser print previews without UI chrome leaks.
   - Multi-page slicing across exact physical page boundaries without orphaned headings or cut text lines.
 - **Automated Test Coverage**:
-  - **112 automated tests across 21 test suites** covering parsing, edge cases, security payloads, persistence resilience, color contrast, multi-format importers, print isolation, AI transformations, and PWA manifest/service worker compliance.
+  - **106 automated tests across 20 test suites** covering parsing, edge cases, security payloads, persistence resilience, color contrast, multi-format importers, print isolation, and AI transformations.
 
 ---
 

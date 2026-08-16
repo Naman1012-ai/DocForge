@@ -1,5 +1,5 @@
 /**
- * DocFrame Phase 16 — Universal Multi-Provider AI Architecture
+ * DocForge Phase 16 — Universal Multi-Provider AI Architecture
  * Type definitions for AI operations, request/result contracts, and multi-provider configs.
  */
 

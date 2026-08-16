@@ -14,37 +14,4 @@ export default defineConfig({
       },
     },
   },
-  build: {
-    chunkSizeWarningLimit: 1200,
-    rollupOptions: {
-      output: {
-        manualChunks(id: string) {
-          if (id.includes('node_modules')) {
-            if (id.includes('pdfjs-dist') || id.includes('jspdf') || id.includes('html2canvas')) {
-              return 'vendor-pdf';
-            }
-            if (id.includes('mammoth')) {
-              return 'vendor-docx';
-            }
-            if (
-              id.includes('unified') ||
-              id.includes('remark') ||
-              id.includes('rehype') ||
-              id.includes('micromark') ||
-              id.includes('mdast') ||
-              id.includes('unist')
-            ) {
-              return 'vendor-markdown';
-            }
-            if (id.includes('lucide-react')) {
-              return 'vendor-icons';
-            }
-            if (id.includes('react') || id.includes('react-dom') || id.includes('scheduler')) {
-              return 'vendor-react';
-            }
-          }
-        },
-      },
-    },
-  },
 });

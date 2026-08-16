@@ -1,5 +1,5 @@
 /**
- * DocFrame Phase 16 — AI Result Validation & Sanitization Boundary
+ * DocForge Phase 16 — AI Result Validation & Sanitization Boundary
  * Validates structured JSON responses and sanitizes generated Markdown against dangerous tags.
  */
 

@@ -96,38 +96,33 @@ DocFrame provides a dual-mode AI transformation subsystem managed through the `A
    - IndexedDB database (`DocFrameWorkspaceDB` with transparent migration from legacy `DocForgeWorkspaceDB`) with automatic version migration and corrupted record recovery.
 5. **Print Isolation**:
    - Screen UI components are isolated from the print DOM to ensure zero UI chrome leakage during printing.
-6. **Progressive Web App (PWA) Security & Service Worker Isolation (Phase 17)**:
-   - Standalone PWA installability with W3C Web App Manifest (`manifest.webmanifest`), 192×192/512×512/maskable icons, and iOS Apple Touch Icon.
-   - Safe Service Worker (`sw.js`) that pre-caches the static application shell.
-   - **Zero-Interception Security Rule**: All API calls (`/api/*`), remote LLM calls (OpenAI, Claude, Gemini, Groq, DeepSeek, OpenRouter), local Ollama endpoints (port 11434), and non-GET requests are strictly bypassed and never cached.
 
 ---
 
 ## 5. Automated Test Strategy & Architecture
 
-DocFrame maintains **112 automated tests across 21 test suites** powered by Vitest:
+DocFrame maintains **106 automated tests across 20 test suites** powered by Vitest:
 
-1. `tests/pwa.test.ts`: Web App Manifest validation, icon dimensions & PNG headers, maskable/Apple icons, index.html links, service worker API bypass security.
-2. `tests/aiTransformation.test.ts`: Multi-provider instantiation, URL normalizers, anti-injection prompts, sanitization, and context-aware transformations.
-3. `tests/pagination.test.ts`: Physical page dimensions, block splitting, single-page fit, multi-page flows, heading orphan prevention, script/dialogue pagination.
-4. `tests/templates.test.ts`: Built-in template registry, recommended theme mappings, starter content integrity.
-5. `tests/printIsolation.test.ts`: Print root isolation, media query rules, and canvas dimensions.
-6. `tests/pdfImporter.test.ts`: Multi-column layout reconstruction, table detection, heading level determination.
-7. `tests/docxImporter.test.ts`: DOCX binary extraction, formatting conversion, error resilience.
-8. `tests/htmlImporter.test.ts`: HTML cleanup, DOM parsing, GFM Markdown normalization.
-9. `tests/workspace.test.ts`: IndexedDB workspace CRUD operations, search filters, sorting.
-10. `tests/e2eUserJourney.test.ts`: End-to-end user journeys from raw input to theme resolution and PDF metadata.
-11. `tests/markdownParser.test.ts`: Semantic HTML parsing and GFM task list/table support.
-12. `tests/markdownEdgeCases.test.ts`: Empty inputs, unmatched syntax, multilingual Unicode (Hindi, Japanese, Arabic, Russian, Greek, math), malformed tables, nested lists.
-13. `tests/securityAudit.test.ts`: Defense against XSS script tags, event handlers, dangerous URI protocols, embedding tags, and malicious SVGs.
-14. `tests/fileUploadSecurity.test.ts`: Extension validation, size caps, and path-traversal sanitization.
-15. `tests/persistenceResilience.test.ts`: Deserialization, schema migrations, and corrupted state recovery.
-16. `tests/filename.test.ts`: Safe cross-platform filesystem filenames.
-17. `tests/color.test.ts`: Hex validation, normalization, and WCAG contrast calculations.
-18. `tests/themeResolution.test.ts`: Dynamic token resolution, custom accent overrides, and font scaling.
-19. `tests/documentMetadata.test.ts`: Word, line, and character count calculations.
-20. `tests/advancedSettings.test.ts`: Legal paper format, custom margins, line-height, and header/footer configurations.
-21. `tests/pdfExport.test.ts`: PDF export error handling and option validation.
+1. `tests/aiTransformation.test.ts`: Multi-provider instantiation, URL normalizers, anti-injection prompts, sanitization, and context-aware transformations.
+2. `tests/pagination.test.ts`: Physical page dimensions, block splitting, single-page fit, multi-page flows, heading orphan prevention, script/dialogue pagination.
+3. `tests/templates.test.ts`: Built-in template registry, recommended theme mappings, starter content integrity.
+4. `tests/printIsolation.test.ts`: Print root isolation, media query rules, and canvas dimensions.
+5. `tests/pdfImporter.test.ts`: Multi-column layout reconstruction, table detection, heading level determination.
+6. `tests/docxImporter.test.ts`: DOCX binary extraction, formatting conversion, error resilience.
+7. `tests/htmlImporter.test.ts`: HTML cleanup, DOM parsing, GFM Markdown normalization.
+8. `tests/workspace.test.ts`: IndexedDB workspace CRUD operations, search filters, sorting.
+9. `tests/e2eUserJourney.test.ts`: End-to-end user journeys from raw input to theme resolution and PDF metadata.
+10. `tests/markdownParser.test.ts`: Semantic HTML parsing and GFM task list/table support.
+11. `tests/markdownEdgeCases.test.ts`: Empty inputs, unmatched syntax, multilingual Unicode (Hindi, Japanese, Arabic, Russian, Greek, math), malformed tables, nested lists.
+12. `tests/securityAudit.test.ts`: Defense against XSS script tags, event handlers, dangerous URI protocols, embedding tags, and malicious SVGs.
+13. `tests/fileUploadSecurity.test.ts`: Extension validation, size caps, and path-traversal sanitization.
+14. `tests/persistenceResilience.test.ts`: Deserialization, schema migrations, and corrupted state recovery.
+15. `tests/filename.test.ts`: Safe cross-platform filesystem filenames.
+16. `tests/color.test.ts`: Hex validation, normalization, and WCAG contrast calculations.
+17. `tests/themeResolution.test.ts`: Dynamic token resolution, custom accent overrides, and font scaling.
+18. `tests/documentMetadata.test.ts`: Word, line, and character count calculations.
+19. `tests/advancedSettings.test.ts`: Legal paper format, custom margins, line-height, and header/footer configurations.
+20. `tests/pdfExport.test.ts`: PDF export error handling and option validation.
 
 ---
 
