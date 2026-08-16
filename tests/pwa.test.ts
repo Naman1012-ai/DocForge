@@ -13,7 +13,7 @@ describe('DocFrame PWA Installability & Manifest Compliance', () => {
     const content = fs.readFileSync(manifestPath, 'utf-8');
     const manifest = JSON.parse(content);
 
-    expect(manifest.name).toBe('DocFrame — Document Synthesis & PDF Studio');
+    expect(manifest.name).toBe('DocFrame — Write. Format. Export.');
     expect(manifest.short_name).toBe('DocFrame');
     expect(manifest.id).toBe('/');
     expect(manifest.start_url).toBe('/');
