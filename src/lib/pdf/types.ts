@@ -1,5 +1,5 @@
 /**
- * DocForge Phase 11 — PDF Import & Layout Reconstruction Types
+ * DocFrame Phase 11 — PDF Import & Layout Reconstruction Types
  */
 
 export interface ExtractedTextItem {

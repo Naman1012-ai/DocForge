@@ -1,5 +1,5 @@
 /**
- * DocForge Phase 16 — Centralized AI Prompt Engineering Layer
+ * DocFrame Phase 16 — Centralized AI Prompt Engineering Layer
  * Enforces strict anti-prompt injection delimiters and structured output formatting.
  */
 

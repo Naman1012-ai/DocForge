@@ -1,5 +1,5 @@
 /**
- * DocForge Phase 16 — Universal Multi-Provider AI Architecture
+ * DocFrame Phase 16 — Universal Multi-Provider AI Architecture
  * Supports Local (100% Offline Context-Aware NLP Engine), OpenAI, Anthropic Claude, Google Gemini,
  * Groq Cloud, DeepSeek, OpenRouter, Ollama / Local LLMs, and Custom endpoints.
  */

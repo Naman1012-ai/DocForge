@@ -1,5 +1,5 @@
 /**
- * DocForge Phase 12 — DOCX Importer & Document Converter
+ * DocFrame Phase 12 — DOCX Importer & Document Converter
  */
 
 import mammoth from 'mammoth';
@@ -17,7 +17,7 @@ export interface ImportedDocxResult {
 const MAX_DOCX_SIZE_BYTES = 25 * 1024 * 1024; // 25 MB
 
 /**
- * Extracts and converts a DOCX File or ArrayBuffer into clean DocForge Markdown
+ * Extracts and converts a DOCX File or ArrayBuffer into clean DocFrame Markdown
  */
 export async function extractDocxContent(
   fileOrBuffer: File | ArrayBuffer,

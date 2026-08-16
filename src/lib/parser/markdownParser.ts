@@ -9,7 +9,7 @@ import type { NormalizedDocument } from '../../models/documentTree';
 /**
  * Strict sanitization schema to prevent XSS while allowing standard document elements
  */
-const docForgeSanitizeSchema = {
+const docFrameSanitizeSchema = {
   ...defaultSchema,
   tagNames: [
     ...(defaultSchema.tagNames || []),
@@ -42,7 +42,7 @@ const processor = unified()
   .use(remarkParse)
   .use(remarkGfm)
   .use(remarkRehype, { allowDangerousHtml: false })
-  .use(rehypeSanitize, docForgeSanitizeSchema)
+  .use(rehypeSanitize, docFrameSanitizeSchema)
   .use(rehypeStringify);
 
 /**

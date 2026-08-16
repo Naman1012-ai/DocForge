@@ -1,5 +1,5 @@
 /**
- * DocForge Phase 12 — Semantic HTML Importer & Sanitization Pipeline
+ * DocFrame Phase 12 — Semantic HTML Importer & Sanitization Pipeline
  */
 
 export interface ImportedHtmlResult {
@@ -260,7 +260,7 @@ function domNodeToMarkdown(
 }
 
 /**
- * Parses and sanitizes raw HTML string into clean DocForge Markdown
+ * Parses and sanitizes raw HTML string into clean DocFrame Markdown
  */
 export function parseHtmlToMarkdown(rawHtml: string, originalFilename: string = 'Imported HTML Document'): ImportedHtmlResult {
   if (!rawHtml || rawHtml.trim().length === 0) {

@@ -1,5 +1,5 @@
 /**
- * DocForge Phase 13 — Template & Document Preset Model
+ * DocFrame Phase 13 — Template & Document Preset Model
  */
 
 import type { ThemeId } from './theme';
